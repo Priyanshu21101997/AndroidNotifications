@@ -14,10 +14,12 @@ import android.support.v4.media.session.MediaSessionCompat
 import android.view.ScrollCaptureSession
 import android.view.View
 import android.widget.EditText
+import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.example.androidnotifications.App.Companion.CHANNEL_1_ID
 import com.example.androidnotifications.App.Companion.CHANNEL_2_ID
+import com.example.androidnotifications.App.Companion.CHANNEL_3_ID
 
 class MainActivity : AppCompatActivity() {
 
@@ -221,6 +223,30 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    fun sendOnChannel3(view:View) {
+
+
+        val artWork:Bitmap = BitmapFactory.decodeResource(resources,R.drawable.dog)
+
+        val collapsedView = RemoteViews(packageName,R.layout.notification_collapsed)
+        val expandedView = RemoteViews(packageName,R.layout.notification_expanded)
+
+
+        collapsedView.setTextViewText(R.id.text_collapsed,"HelloWorld")
+
+        val notification = NotificationCompat.Builder(this,CHANNEL_3_ID)
+            .setSmallIcon(R.drawable.ic_two)
+            .setCustomContentView(collapsedView)
+            .setCustomBigContentView(expandedView)
+            .setStyle(NotificationCompat.DecoratedCustomViewStyle()) // Border around notification
+            .build()
+
+        notificationManagerCompat.notify(3,notification)
+
+
+    }
+
+
     class ExampleRunnable(val notification:NotificationCompat.Builder,val notificationManagerCompat:NotificationManagerCompat):Runnable{
         override fun run() {
             SystemClock.sleep(2000)
@@ -235,4 +261,8 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-}
+
+
+
+
+    }

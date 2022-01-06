@@ -10,6 +10,8 @@ class App:Application() {
     companion object{
         val CHANNEL_1_ID = "channel1"
         val CHANNEL_2_ID = "channel2"
+        val CHANNEL_3_ID = "channel3"
+
     }
 
     override fun onCreate() {
@@ -27,9 +29,17 @@ class App:Application() {
             val channel2 = NotificationChannel(CHANNEL_2_ID,"Channel 2",NotificationManager.IMPORTANCE_LOW)
             channel2.description = "This is Channel 2"
 
+
+            // This channel is made for custom notifications
+
+            val channel3 = NotificationChannel(CHANNEL_3_ID,"Channel 3",NotificationManager.IMPORTANCE_HIGH)
+            channel3.description = "This is Channel 3"
+
             val manager  = getSystemService(NotificationManager::class.java)
             manager.createNotificationChannel(channel1)
             manager.createNotificationChannel(channel2)
+            manager.createNotificationChannel(channel3)
+
 
         }
     }
